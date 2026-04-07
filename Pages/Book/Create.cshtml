@@ -1,0 +1,61 @@
+﻿@page
+@model LibraryManagementSystem.Pages.Books.CreateModel
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white fw-semibold">
+                <i class="bi bi-plus-circle me-2 text-primary"></i>Add New Book
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    <div class="alert alert-danger small py-2">@Model.ErrorMessage</div>
+                }
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+                        <input type="text" name="Title" class="form-control" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Author <span class="text-danger">*</span></label>
+                        <input type="text" name="Author" class="form-control" required />
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">ISBN</label>
+                            <input type="text" name="ISBN" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold">Genre</label>
+                            <select name="Genre" class="form-select">
+                                <option value="">-- Select Genre --</option>
+                                <option>Fiction</option>
+                                <option>Non-Fiction</option>
+                                <option>Science</option>
+                                <option>Technology</option>
+                                <option>History</option>
+                                <option>Biography</option>
+                                <option>Reference</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Total Copies</label>
+                        <input type="number" name="TotalCopies" class="form-control" value="1" min="1" />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save me-1"></i>Save Book
+                        </button>
+                        <a href="/Books" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

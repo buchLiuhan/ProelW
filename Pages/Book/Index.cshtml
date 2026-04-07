@@ -1,0 +1,89 @@
+﻿@page
+@model LibraryManagementSystem.Pages.Books.IndexModel
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0"><i class="bi bi-journals me-2"></i>Books</h4>
+    @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+    {
+        <a href="/Books/Create" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus-lg me-1"></i>Add Book
+        </a>
+    }
+</div>
+
+<div class="card mb-3">
+    <div class="card-body py-2">
+        <form method="get" class="d-flex gap-2">
+            <input type="text" name="search" value="@Model.Search"
+                   class="form-control form-control-sm" placeholder="Search title, author, ISBN..." />
+            <button class="btn btn-outline-primary btn-sm px-3" type="submit">Search</button>
+            @if (!string.IsNullOrEmpty(Model.Search))
+            {
+                <a href="/Books" class="btn btn-outline-secondary btn-sm">Clear</a>
+            }
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body p-0">
+        <table class="table table-hover mb-0 align-middle">
+            <thead>
+                <tr>
+                    <th class="ps-3">#</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>ISBN</th>
+                    <th>Total</th>
+                    <th>Available</th>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+                    {
+                        <th>Actions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Books)
+                {
+                    <tr>
+                        <td class="ps-3">@book.Id</td>
+                        <td class="fw-semibold">@book.Title</td>
+                        <td>@book.Author</td>
+                        <td><span class="badge bg-secondary">@book.Genre</span></td>
+                        <td class="text-muted small">@book.ISBN</td>
+                        <td>@book.TotalCopies</td>
+                        <td>
+                            @if (book.AvailableCopies > 0)
+                            {
+                                <span class="badge bg-success">@book.AvailableCopies</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">0</span>
+                            }
+                        </td>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+                        {
+                            <td>
+                                <a href="/Books/Edit/@book.Id" class="btn btn-warning btn-sm">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="/Books/Delete/@book.Id" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                }
+                @if (!Model.Books.Any())
+                {
+                    <tr><td colspan="8" class="text-center text-muted py-4">No books found.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

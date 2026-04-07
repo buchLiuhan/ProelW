@@ -1,0 +1,41 @@
+﻿@model LibraryManagementSystem.Models.BorrowRecord
+@{
+    ViewData["Title"] = "Return Book";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-sm border-success">
+            <div class="card-header bg-success text-white fw-semibold">
+                <i class="bi bi-check-circle me-2"></i>Confirm Book Return
+            </div>
+            <div class="card-body text-center py-4">
+                <p class="mb-1 text-muted">Returning book for:</p>
+                <h5 class="fw-bold">@Model.User.FullName</h5>
+                <p class="mb-1 text-muted mt-2">Book:</p>
+                <h5 class="fw-bold">@Model.Book.Title</h5>
+                <p class="small text-muted">Due: @Model.DueDate.ToString("MMMM dd, yyyy")</p>
+
+                @if (Model.DueDate < DateTime.Now)
+                {
+                    <div class="alert alert-warning py-2 small">
+                        <i class="bi bi-exclamation-triangle me-1"></i>
+                        This book is <strong>overdue</strong> by
+                        @((DateTime.Now - Model.DueDate).Days) day(s).
+                    </div>
+                }
+
+                <div class="d-flex justify-content-center gap-3 mt-3">
+                    <form method="post" asp-action="Return" asp-route-id="@Model.Id">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check-lg me-1"></i>Confirm Return
+                        </button>
+                    </form>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

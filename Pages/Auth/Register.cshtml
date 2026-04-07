@@ -1,0 +1,81 @@
+﻿@page
+@model LibraryManagementSystem.Pages.Auth.RegisterModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register — Libman</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <style>
+        body {
+            background: #1a1f36;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .brand {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1a1f36;
+        }
+
+            .brand span {
+                color: #4e73df;
+            }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="text-center mb-4">
+            <div class="brand">Lib<span>man</span></div>
+            <p class="text-muted small">Create your account</p>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger py-2 small">@Model.ErrorMessage</div>
+        }
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Full Name</label>
+                <input type="text" name="FullName" class="form-control" placeholder="Juan Dela Cruz" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input type="email" name="Email" class="form-control" placeholder="you@email.com" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                <input type="password" name="Password" class="form-control" placeholder="••••••••" required />
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Role</label>
+                <select name="Role" class="form-select">
+                    <option value="Student">Student</option>
+                    <option value="Librarian">Librarian</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 fw-semibold">Register</button>
+        </form>
+
+        <p class="text-center text-muted small mt-3">
+            Already have an account? <a href="/Auth/Login">Login</a>
+        </p>
+    </div>
+</body>
+</html>

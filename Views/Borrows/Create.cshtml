@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Issue Book";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-white fw-semibold">
+                <i class="bi bi-plus-circle me-2 text-primary"></i>Issue a Book
+            </div>
+            <div class="card-body">
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger py-2 small">@TempData["Error"]</div>
+                }
+                <form method="post" asp-action="Create">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Student</label>
+                        <select name="userId" class="form-select" required>
+                            <option value="">-- Select Student --</option>
+                            @foreach (var item in (SelectList)ViewBag.Users)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Book</label>
+                        <select name="bookId" class="form-select" required>
+                            <option value="">-- Select Available Book --</option>
+                            @foreach (var item in (SelectList)ViewBag.Books)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Due Date</label>
+                        <input type="date" name="dueDate" class="form-control"
+                               value="@DateTime.Now.AddDays(7).ToString("yyyy-MM-dd")" required />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save me-1"></i>Issue Book
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
