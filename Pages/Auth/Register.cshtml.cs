@@ -1,7 +1,7 @@
 using LibraryManagementSystem.Data;
-using LibraryManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UserModel = LibraryManagementSystem.Models.User;
 
 namespace LibraryManagementSystem.Pages.Auth;
 
@@ -22,7 +22,7 @@ public class RegisterModel : PageModel
             return Page();
         }
 
-        var user = new User
+        var user = new UserModel
         {
             FullName = fullName,
             Email = email,
@@ -32,7 +32,6 @@ public class RegisterModel : PageModel
 
         _db.Users.Add(user);
         _db.SaveChanges();
-
         return RedirectToPage("/Auth/Login");
     }
 }

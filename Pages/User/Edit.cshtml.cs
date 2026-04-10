@@ -1,5 +1,4 @@
 using LibraryManagementSystem.Data;
-using LibraryManagementSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,7 +10,7 @@ namespace LibraryManagementSystem.Pages.Users;
 public class EditModel : PageModel
 {
     private readonly AppDbContext _db;
-    public UserModel User { get; set; } = new();
+    public UserModel SelectedUser { get; set; } = new();
     public string ErrorMessage { get; set; } = string.Empty;
 
     public EditModel(AppDbContext db) => _db = db;
@@ -20,7 +19,7 @@ public class EditModel : PageModel
     {
         var user = _db.Users.Find(id);
         if (user == null) return RedirectToPage("/Users/Index");
-        User = user;
+        SelectedUser = user;
         return Page();
     }
 
@@ -35,7 +34,7 @@ public class EditModel : PageModel
         {
             if (newPassword.Length < 6)
             {
-                User = user;
+                SelectedUser = user;
                 ErrorMessage = "Password must be at least 6 characters.";
                 return Page();
             }
@@ -44,6 +43,6 @@ public class EditModel : PageModel
 
         _db.SaveChanges();
         TempData["Success"] = $"{user.FullName}'s profile has been updated.";
-        return RedirectToPage("/Users/Index");
+        return RedirectToPage("/Users");
     }
 }

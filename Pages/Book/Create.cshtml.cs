@@ -37,6 +37,8 @@ public class CreateModel : PageModel
 
         _db.Books.Add(book);
         _db.SaveChanges();
-        return RedirectToPage("/Books/Index");
+        return RedirectToPage("/Books");
     }
 }
+
+

@@ -23,7 +23,7 @@ public class IndexModel : PageModel
     public void OnGet()
     {
         TotalBooks = _db.Books.Count();
-        AvailableBooks = _db.Books.Sum(b => (int?)b.AvailableCopies) ?? 0;
+        AvailableBooks = _db.Books.Any() ? _db.Books.Sum(b => b.AvailableCopies) : 0;
         ActiveBorrows = _db.BorrowRecords.Count(b => b.ReturnedAt == null);
         TotalUsers = _db.Users.Count();
 

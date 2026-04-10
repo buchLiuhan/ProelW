@@ -1,8 +1,8 @@
 using LibraryManagementSystem.Data;
-using LibraryManagementSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UserModel = LibraryManagementSystem.Models.User;
 
 namespace LibraryManagementSystem.Pages.Users;
 
@@ -10,7 +10,7 @@ namespace LibraryManagementSystem.Pages.Users;
 public class IndexModel : PageModel
 {
     private readonly AppDbContext _db;
-    public List<User> Users { get; set; } = new();
+    public List<UserModel> Users { get; set; } = new();
     public string Search { get; set; } = string.Empty;
 
     public IndexModel(AppDbContext db) => _db = db;
@@ -37,8 +37,6 @@ public class IndexModel : PageModel
             _db.SaveChanges();
             TempData["Success"] = $"{user.FullName} has been deleted.";
         }
-        return RedirectToPage();
+        return RedirectToPage("/Users");
     }
-
-    //dddddd
 }
