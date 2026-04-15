@@ -30,6 +30,6 @@ public class DeleteModel : PageModel
             _db.Books.Remove(book);
             _db.SaveChanges();
         }
-        return RedirectToPage("/Books");
+        return Redirect("/Books");
     }
 }

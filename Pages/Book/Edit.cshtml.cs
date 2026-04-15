@@ -38,6 +38,6 @@ public class EditModel : PageModel
         book.AvailableCopies = Math.Max(0, book.AvailableCopies + diff);
 
         _db.SaveChanges();
-        return RedirectToPage("/Books");
+        return Redirect("/Books");
     }
 }

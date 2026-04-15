@@ -37,6 +37,6 @@ public class IndexModel : PageModel
             _db.SaveChanges();
             TempData["Success"] = $"{user.FullName} has been deleted.";
         }
-        return RedirectToPage("/Users");
+        return Redirect("/Users");
     }
 }

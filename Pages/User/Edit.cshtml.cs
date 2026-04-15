@@ -43,6 +43,6 @@ public class EditModel : PageModel
 
         _db.SaveChanges();
         TempData["Success"] = $"{user.FullName}'s profile has been updated.";
-        return RedirectToPage("/Users");
+        return Redirect("/Users");
     }
 }
