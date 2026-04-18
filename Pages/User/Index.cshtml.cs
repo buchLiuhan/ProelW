@@ -1,6 +1,5 @@
 using LibraryManagementSystem.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserModel = LibraryManagementSystem.Models.User;
 
@@ -12,13 +11,19 @@ public class IndexModel : PageModel
     private readonly AppDbContext _db;
     public List<UserModel> Users { get; set; } = new();
     public string Search { get; set; } = string.Empty;
+    public bool ShowInactive { get; set; }
 
     public IndexModel(AppDbContext db) => _db = db;
 
-    public void OnGet(string search = "")
+    public void OnGet(string search = "", bool showInactive = false)
     {
         Search = search;
+        ShowInactive = showInactive;
+
         var query = _db.Users.AsQueryable();
+
+        if (!showInactive)
+            query = query.Where(u => u.IsActive);
 
         if (!string.IsNullOrWhiteSpace(search))
             query = query.Where(u =>
@@ -26,17 +31,5 @@ public class IndexModel : PageModel
                 u.Email.Contains(search));
 
         Users = query.OrderBy(u => u.FullName).ToList();
-    }
-
-    public IActionResult OnPostDelete(int id)
-    {
-        var user = _db.Users.Find(id);
-        if (user != null && user.Email != "admin@libman.com")
-        {
-            _db.Users.Remove(user);
-            _db.SaveChanges();
-            TempData["Success"] = $"{user.FullName} has been deleted.";
-        }
-        return Redirect("/Users");
     }
 }

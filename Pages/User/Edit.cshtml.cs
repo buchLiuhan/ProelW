@@ -26,7 +26,15 @@ public class EditModel : PageModel
     public IActionResult OnPost(int id, string role, string? newPassword)
     {
         var user = _db.Users.Find(id);
-        if (user == null) return RedirectToPage("/Users/Index");
+        if (user == null) return Redirect("/Users");
+
+        // Prevent promoting to Admin via UI
+        if (role == "Admin")
+        {
+            SelectedUser = user;
+            ErrorMessage = "Admin role cannot be assigned from here.";
+            return Page();
+        }
 
         user.Role = role;
 

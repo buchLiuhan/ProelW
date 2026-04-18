@@ -1,0 +1,29 @@
+﻿@page "/Users/Restore/{id:int}"
+@model LibraryManagementSystem.Pages.Users.RestoreModel
+@{
+    ViewData["Title"] = "Restore User";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-sm border-success">
+            <div class="card-header bg-success text-white fw-semibold">
+                <i class="bi bi-arrow-counterclockwise me-2"></i>Restore User
+            </div>
+            <div class="card-body text-center py-4">
+                <p class="mb-1 text-muted">Restore access for this account?</p>
+                <h5 class="fw-bold">@Model.SelectedUser.FullName</h5>
+                <p class="text-muted small">@Model.SelectedUser.Email</p>
+                <div class="d-flex justify-content-center gap-3 mt-3">
+                    <form method="post">
+                        <input type="hidden" name="id" value="@Model.SelectedUser.Id" />
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Yes, Restore
+                        </button>
+                    </form>
+                    <a href="/Users" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@
     <title>Libman — @ViewData["Title"]</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="icon" type="image/svg+xml" href="~/images/favicon.svg" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
@@ -50,6 +51,12 @@
                                 <a class="nav-link @(ViewData["Title"]?.ToString() == "My Borrowed Books" ? "active" : "")"
                                    href="/MyBorrows">
                                     <i class="bi bi-bookmark-check me-1"></i>My Borrows
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewData["Title"]?.ToString() == "Library Policy" ? "active" : "")"
+                                   href="/Policy">
+                                    <i class="bi bi-clipboard-check me-1"></i>Policy
                                 </a>
                             </li>
                         }

@@ -41,8 +41,8 @@ public class BorrowsController : Controller
             "Id", "FullName");
 
         ViewBag.Books = new SelectList(
-            _db.Books.Where(b => b.AvailableCopies > 0).ToList(),
-            "Id", "Title");
+           _db.Books.Where(b => b.AvailableCopies > 0 && b.IsActive).ToList(),
+           "Id", "Title");
 
         return View();
     }

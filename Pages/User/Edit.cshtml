@@ -41,11 +41,8 @@
                                     selected="@(Model.SelectedUser.Role == "Librarian")">
                                 Librarian
                             </option>
-                            <option value="Admin"
-                                    selected="@(Model.SelectedUser.Role == "Admin")">
-                                Admin
-                            </option>
                         </select>
+                        <div class="form-text">Admin role can only be assigned directly in the database.</div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Reset Password</label>

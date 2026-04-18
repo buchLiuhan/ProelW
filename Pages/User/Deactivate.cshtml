@@ -1,42 +1,43 @@
-﻿@page "/Books/Delete/{id:int}"
-@model LibraryManagementSystem.Pages.Books.DeleteModel
+﻿@page "/Users/Deactivate/{id:int}"
+@model LibraryManagementSystem.Pages.Users.DeactivateModel
 @{
-    ViewData["Title"] = "Deactivate Book";
+    ViewData["Title"] = "Deactivate User";
 }
 
 <div class="row justify-content-center">
     <div class="col-md-5">
         <div class="card shadow-sm border-warning">
             <div class="card-header bg-warning text-dark fw-semibold">
-                <i class="bi bi-slash-circle me-2"></i>Deactivate Book
+                <i class="bi bi-slash-circle me-2"></i>Deactivate User
             </div>
             <div class="card-body text-center py-4">
                 @if (Model.HasActiveBorrows)
                 {
                     <div class="alert alert-danger small">
                         <i class="bi bi-exclamation-triangle me-2"></i>
-                        This book <strong>cannot be deactivated</strong> because
-                        it is currently borrowed by a student.
+                        This user <strong>cannot be deactivated</strong> because
+                        they currently have borrowed books that are not yet returned.
                     </div>
-                    <a href="/Books" class="btn btn-outline-secondary mt-2">Go Back</a>
+                    <a href="/Users" class="btn btn-outline-secondary mt-2">Go Back</a>
                 }
                 else
                 {
-                    <p class="mb-1 text-muted">You are about to deactivate:</p>
-                    <h5 class="fw-bold">@Model.Book.Title</h5>
-                    <p class="text-muted small">by @Model.Book.Author</p>
+                    <p class="mb-1 text-muted">Deactivate this account?</p>
+                    <h5 class="fw-bold">@Model.SelectedUser.FullName</h5>
+                    <p class="text-muted small">@Model.SelectedUser.Email</p>
                     <p class="small text-muted">
-                        The book will be hidden from borrowing but all
-                        history will be preserved.
+                        The user will not be able to login but all
+                        borrow history will be preserved.
                     </p>
                     <div class="d-flex justify-content-center gap-3 mt-3">
                         <form method="post">
-                            <input type="hidden" name="id" value="@Model.Book.Id" />
+                            <input type="hidden" name="id"
+                                   value="@Model.SelectedUser.Id" />
                             <button type="submit" class="btn btn-warning text-dark">
                                 <i class="bi bi-slash-circle me-1"></i>Deactivate
                             </button>
                         </form>
-                        <a href="/Books" class="btn btn-outline-secondary">Cancel</a>
+                        <a href="/Users" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                 }
             </div>

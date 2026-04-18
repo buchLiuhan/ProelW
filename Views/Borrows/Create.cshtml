@@ -3,6 +3,8 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" />
+
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card shadow-sm">
@@ -18,7 +20,7 @@
                     @Html.AntiForgeryToken()
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Student</label>
-                        <select name="userId" class="form-select" required>
+                        <select name="userId" id="studentSelect" class="form-select" required>
                             <option value="">-- Select Student --</option>
                             @foreach (var item in (SelectList)ViewBag.Users)
                             {
@@ -28,7 +30,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Book</label>
-                        <select name="bookId" class="form-select" required>
+                        <select name="bookId" id="bookSelect" class="form-select" required>
                             <option value="">-- Select Available Book --</option>
                             @foreach (var item in (SelectList)ViewBag.Books)
                             {
@@ -52,3 +54,15 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+<script>
+    new TomSelect('#studentSelect', {
+        placeholder: 'Search student...',
+        allowEmptyOption: true
+    });
+    new TomSelect('#bookSelect', {
+        placeholder: 'Search book...',
+        allowEmptyOption: true
+    });
+</script>

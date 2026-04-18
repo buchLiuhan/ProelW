@@ -1,0 +1,204 @@
+﻿@page "/Policy"
+@{
+    ViewData["Title"] = "Library Policy";
+    Layout = "_Layout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body px-4 py-4">
+                <div class="text-center mb-4">
+                    <i class="bi bi-book-half text-primary" style="font-size:2.5rem;"></i>
+                    <h3 class="fw-bold mt-2">Library Policy</h3>
+                    <p class="text-muted small">
+                        Please read and follow all library rules and regulations.
+                    </p>
+                </div>
+
+                <hr />
+
+                <!-- Operating Hours -->
+                <h6 class="fw-bold text-primary mt-4">
+                    <i class="bi bi-clock me-2"></i>Operating Hours
+                </h6>
+                <div class="table-responsive mb-3">
+                    <table class="table table-sm table-bordered small text-center mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Day</th>
+                                <th>Opening</th>
+                                <th>Lunch Break</th>
+                                <th>Closing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Monday – Friday</td>
+                                <td>7:00 AM</td>
+                                <td>12:00 PM – 1:00 PM</td>
+                                <td>6:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Saturday</td>
+                                <td>8:00 AM</td>
+                                <td>12:00 PM – 1:00 PM</td>
+                                <td>5:00 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Sunday</td>
+                                <td colspan="3" class="text-muted">Closed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="alert alert-warning py-2 small mb-4">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <strong>Lunch Break Notice (12:00 PM – 1:00 PM):</strong>
+                    The library remains open for reading and studying during lunch break,
+                    however <strong>borrowing and returning of books is unavailable</strong>
+                    as the librarian is on break. If a second librarian is on duty,
+                    borrowing services may still be available. Please check with library
+                    staff on duty.
+                </div>
+
+                <!-- Borrowing Rules -->
+                <h6 class="fw-bold text-primary mt-4">
+                    <i class="bi bi-bookmark-check me-2"></i>Borrowing Rules
+                </h6>
+                <ul class="text-muted small mb-4">
+                    <li class="mb-2">
+                        Each student is allowed to borrow <strong>one (1) copy per book title</strong> at a time.
+                    </li>
+                    <li class="mb-2">
+                        A student may borrow <strong>multiple different book titles</strong> simultaneously.
+                    </li>
+                    <li class="mb-2">
+                        Books must be borrowed in person at the library counter
+                        with the assistance of a librarian.
+                    </li>
+                    <li class="mb-2">
+                        Borrowed books must be returned on or before the due date
+                        indicated at the time of borrowing.
+                    </li>
+                    <li class="mb-2">
+                        The standard loan period is <strong>7 days</strong> from the date of borrowing.
+                    </li>
+                    <li class="mb-2">
+                        Borrowing transactions are only processed during library operating hours
+                        and when a librarian is available.
+                    </li>
+                </ul>
+
+                <!-- Why Only One Copy -->
+                <div class="alert alert-info py-3 small mb-4">
+                    <h6 class="fw-semibold">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Why can't I borrow two copies of the same book?
+                    </h6>
+                    <p class="mb-2">
+                        Our library follows a <strong>one copy per title per student</strong> policy.
+                        This is a standard practice in academic libraries for the following reasons:
+                    </p>
+                    <ul class="mb-0">
+                        <li class="mb-1">
+                            <strong>Resource Equity</strong> — Popular titles, especially textbooks,
+                            are in high demand. Allowing one student to hold multiple copies of the
+                            same title prevents other students from accessing the same material.
+                        </li>
+                        <li class="mb-1">
+                            <strong>Fair Access</strong> — Our collection is a shared resource.
+                            The policy ensures that as many students as possible can benefit from
+                            each available copy.
+                        </li>
+                        <li class="mb-0">
+                            <strong>System Policy</strong> — Our library system is configured to
+                            automatically block a second borrow of the same title if a student
+                            already has an active loan for it. This is intentional and ensures
+                            consistent enforcement of the rule.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Returning Rules -->
+                <h6 class="fw-bold text-primary mt-4">
+                    <i class="bi bi-arrow-return-left me-2"></i>Returning Rules
+                </h6>
+                <ul class="text-muted small mb-4">
+                    <li class="mb-2">
+                        Books must be returned to the library counter and
+                        processed by a librarian.
+                    </li>
+                    <li class="mb-2">
+                        Books must be returned in the <strong>same condition</strong>
+                        they were borrowed.
+                    </li>
+                    <li class="mb-2">
+                        Students are responsible for any damage or loss of borrowed books.
+                    </li>
+                    <li class="mb-2">
+                        Do not leave returned books unattended — always ensure the
+                        librarian processes your return before leaving.
+                    </li>
+                    <li class="mb-2">
+                        Returns are only processed during library operating hours
+                        and when a librarian is available.
+                    </li>
+                </ul>
+
+                <!-- Overdue Policy -->
+                <h6 class="fw-bold text-danger mt-4">
+                    <i class="bi bi-exclamation-triangle me-2"></i>Overdue Policy
+                </h6>
+                <ul class="text-muted small mb-4">
+                    <li class="mb-2">
+                        Books not returned by the due date are considered
+                        <strong>overdue</strong>.
+                    </li>
+                    <li class="mb-2">
+                        Students with overdue books may have their borrowing
+                        privileges suspended.
+                    </li>
+                    <li class="mb-2">
+                        Repeated overdue violations may result in account deactivation
+                        pending review by the librarian or administrator.
+                    </li>
+                    <li class="mb-2">
+                        Contact the librarian <strong>immediately</strong> if you are
+                        unable to return a book on time.
+                    </li>
+                </ul>
+
+                <!-- General Rules -->
+                <h6 class="fw-bold text-primary mt-4">
+                    <i class="bi bi-clipboard-check me-2"></i>General Rules
+                </h6>
+                <ul class="text-muted small mb-4">
+                    <li class="mb-2">
+                        Library accounts are for <strong>personal use only</strong>
+                        and must not be shared.
+                    </li>
+                    <li class="mb-2">
+                        Report any issues with your account or borrowed books to
+                        the librarian immediately.
+                    </li>
+                    <li class="mb-2">
+                        The library reserves the right to update these policies at any time.
+                    </li>
+                    <li class="mb-2">
+                        All library users are expected to conduct themselves with
+                        respect for other users and library property.
+                    </li>
+                </ul>
+
+                <hr />
+                <p class="text-muted text-center small mb-0">
+                    <i class="bi bi-info-circle me-1"></i>
+                    For questions or concerns, please approach the librarian or
+                    visit the library during operating hours.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>

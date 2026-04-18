@@ -6,17 +6,47 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="fw-bold mb-0"><i class="bi bi-journals me-2"></i>Books</h4>
-    @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
-    {
-        <a href="/Books/Create" class="btn btn-primary btn-sm">
-            <i class="bi bi-plus-lg me-1"></i>Add Book
-        </a>
-    }
+    <div class="d-flex gap-2">
+        @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
+        {
+            <a href="/Books/Create" class="btn btn-primary btn-sm">
+                <i class="bi bi-plus-lg me-1"></i>Add Book
+            </a>
+            @if (Model.ShowInactive)
+            {
+                <a href="/Books" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-eye me-1"></i>Active Only
+                </a>
+            }
+            else
+            {
+                <a href="/Books?showInactive=true" class="btn btn-outline-secondary btn-sm">
+                    <i class="bi bi-eye-slash me-1"></i>Show Deactivated
+                </a>
+            }
+        }
+    </div>
 </div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show py-2 small">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show py-2 small">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
 
 <div class="card mb-3">
     <div class="card-body py-2">
         <form method="get" class="d-flex gap-2">
+            <input type="hidden" name="showInactive" value="@Model.ShowInactive.ToString().ToLower()" />
             <input type="text" name="search" value="@Model.Search"
                    class="form-control form-control-sm" placeholder="Search title, author, ISBN..." />
             <button class="btn btn-outline-primary btn-sm px-3" type="submit">Search</button>
@@ -40,6 +70,7 @@
                     <th>ISBN</th>
                     <th>Total</th>
                     <th>Available</th>
+                    <th>Status</th>
                     @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
                     {
                         <th>Actions</th>
@@ -49,7 +80,7 @@
             <tbody>
                 @foreach (var book in Model.Books)
                 {
-                    <tr>
+                    <tr class="@(!book.IsActive ? "table-secondary text-muted" : "")">
                         <td class="ps-3">@book.Id</td>
                         <td class="fw-semibold">@book.Title</td>
                         <td>@book.Author</td>
@@ -57,7 +88,7 @@
                         <td class="text-muted small">@book.ISBN</td>
                         <td>@book.TotalCopies</td>
                         <td>
-                            @if (book.AvailableCopies > 0)
+                            @if (book.AvailableCopies > 0 && book.IsActive)
                             {
                                 <span class="badge bg-success">@book.AvailableCopies</span>
                             }
@@ -66,22 +97,41 @@
                                 <span class="badge bg-danger">0</span>
                             }
                         </td>
+                        <td>
+                            @if (book.IsActive)
+                            {
+                                <span class="badge bg-success">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Inactive</span>
+                            }
+                        </td>
                         @if (User.IsInRole("Admin") || User.IsInRole("Librarian"))
                         {
                             <td>
-                                <a href="/Books/Edit/@book.Id" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="/Books/Delete/@book.Id" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-trash"></i>
-                                </a>
+                                @if (book.IsActive)
+                                {
+                                    <a href="/Books/Edit/@book.Id" class="btn btn-warning btn-sm">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="/Books/Delete/@book.Id" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-slash-circle"></i>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="/Books/Restore/@book.Id" class="btn btn-success btn-sm">
+                                        <i class="bi bi-arrow-counterclockwise"></i>
+                                    </a>
+                                }
                             </td>
                         }
                     </tr>
                 }
                 @if (!Model.Books.Any())
                 {
-                    <tr><td colspan="8" class="text-center text-muted py-4">No books found.</td></tr>
+                    <tr><td colspan="9" class="text-center text-muted py-4">No books found.</td></tr>
                 }
             </tbody>
         </table>
